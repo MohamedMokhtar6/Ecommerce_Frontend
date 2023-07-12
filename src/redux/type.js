@@ -1,0 +1,11 @@
+export const GET_ALL_CATEGORY = "GET_ALL_CATEGORY";
+export const GET_ERROR = "GET_ERROR";
+export const GET_ALL_BRAND = "GET_ALL_BRAND";
+export const GET_ALL_ProductS = "GET_ALL_ProductS";
+export const GET_Product_DETAILS = "GET_Product_DETAILS";
+export const GET_ONE_CATEGORY = "GET_ONE_CATEGORY";
+export const GET_ONE_BRAND = "GET_ONE_BRAND";
+export const GET_Product_Like = "GET_Product_Like";
+export const GET_ALL_PRODUCT_PAGE = "GET_ALL_PRODUCT_PAGE";
+export const CREATE_USER = "CREATE_USER";
+export const LOGIN_USER = "LOGIN_USER";
