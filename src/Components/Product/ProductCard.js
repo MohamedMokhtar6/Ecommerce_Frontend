@@ -11,11 +11,11 @@ function ProductCard({ product }) {
         <Card.Img
           variant="top"
           src={"data:image/png;base64," + product.poster}
-          style={{ width: "200px", height: "150px", padding: "1rem" }}
+          style={{ width: "200px", height: "200px", padding: "1rem" }}
         />
         <div className="d-flex w-100">
           <Card.Body>
-            <Card.Title>{product?.name}</Card.Title>
+            <Card.Title className="cName">{product?.name}</Card.Title>
             <Card.Text>{product?.category?.name}</Card.Text>
             <div style={{ color: "goldenrod" }}>
               {rate

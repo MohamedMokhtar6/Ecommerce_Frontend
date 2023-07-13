@@ -12,7 +12,7 @@ function ProductsRow({ title, btntitle, pathText, products }) {
   return (
     <Container className="mb-2">
       <SubTitle title={title} btntitle={btntitle} pathText={pathText} />
-      <Row className="justify-content-between ">
+      <Row className="justify-content-center ">
         {items
           ? items.map((item, index) => {
               return <ProductCard key={index} product={item} />;

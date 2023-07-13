@@ -1,10 +1,28 @@
 import React, { useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CatNavBar from "./CatNavBar";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getAllProductSearch,
+  getProducts,
+} from "../../redux/Actions/ProductAction";
 
 function Navbaradmin() {
   var user = localStorage.getItem("user");
+  const [search, setSearch] = useState("");
+  const dispatch = useDispatch();
 
+  const allProducts = useSelector((state) => state.allproducts.allProducts);
+  const changeSearch = (e) => {
+    const value = e.target.value;
+    setSearch(value);
+    if (value !== "") {
+      dispatch(getAllProductSearch(value));
+      console.log(allProducts);
+    } else {
+      dispatch(getProducts());
+    }
+  };
   const navigate = useNavigate();
   return (
     <>
@@ -27,6 +45,8 @@ function Navbaradmin() {
             type="search"
             placeholder="what are you looking for ?"
             className="search"
+            value={search}
+            onChange={changeSearch}
           />
         </div>
 
@@ -37,7 +57,15 @@ function Navbaradmin() {
           </Link>
         </div>
         <div className="d-flex justify-content-center navItem">
-          <Link to="/login">{user ? <>LogOut</> : <>SignIn</>}</Link>
+          <Link
+            to="/login"
+            onClick={() => {
+              localStorage.removeItem("user");
+              navigate("/login");
+            }}
+          >
+            {user ? <>LogOut</> : <>SignIn</>}
+          </Link>
         </div>
       </div>
       <CatNavBar />

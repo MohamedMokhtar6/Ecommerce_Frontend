@@ -17,7 +17,7 @@ function ProductDetails() {
   useEffect(() => {
     dispatch(getOneProduct(id));
   }, [id]);
-  const productLike = useSelector((state) => state.allproducts.oneProductLike);
+  const productLike = useSelector((state) => state.allproducts.allProducts);
 
   const Product = useSelector((state) => state.allproducts.oneProduct);
   let item = {};
@@ -52,7 +52,7 @@ function ProductDetails() {
             xs="6"
             className="d-flex flex-column justify-content-center p-0 "
           >
-            <h1 className="fw-bold m-1">{item.name}</h1>
+            <h3 className="fw-bold m-1">{item.name}</h3>
             <span className="d-block  m-1">
               Category: {item?.category?.name}{" "}
             </span>
@@ -67,7 +67,7 @@ function ProductDetails() {
               ></i>
             </span>
             <p className=" m-1">{item.description}</p>
-            <p className=" m-1">Quantity : {item.quntity}</p>
+            <p className=" m-1">In Stock : {item.quntity}</p>
             <p className=" m-1">Price : {item.price} EGP</p>
             <Button
               className="fit  border-0 my-2"

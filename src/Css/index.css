@@ -204,6 +204,27 @@ a{
 /*___________________________Start__Product____________________*/
 .prodCard{
   color: black !important;
+  overflow: hidden;
+
+}
+.prodCard img{
+  transition: all 0.5s ;
+  -webkit-transition: all 0.5s ;
+  -moz-transition: all 0.5s ;
+  -ms-transition: all 0.5s ;
+  -o-transition: all 0.5s ;
+}
+.prodCard:hover img{
+  transform:scale(1.1);
+  -webkit-transform:scale(1.1);
+  -moz-transform:scale(1.1);
+  -ms-transform:scale(1.1);
+  -o-transform:scale(1.1);
+}
+.cName{
+   text-overflow: ellipsis;
+    overflow: hidden;
+     height: 5rem;
 }
 
 /*___________________________End__Product____________________*/

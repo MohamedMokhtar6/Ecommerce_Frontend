@@ -30,7 +30,7 @@ const productsReducer = (state = inital, action) => {
       return {
         ...state,
         loading: true,
-        oneProductLike: action.payload,
+        allProducts: action.payload,
       };
 
     default:
