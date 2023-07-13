@@ -8,10 +8,12 @@ import {
 } from "../../redux/Actions/ProductAction";
 
 function Navbaradmin() {
-  var user = localStorage.getItem("user");
+  var user = JSON.parse(localStorage.getItem("user"));
   const [search, setSearch] = useState("");
   const dispatch = useDispatch();
-
+  if (user) {
+    console.log(user);
+  }
   const allProducts = useSelector((state) => state.allproducts.allProducts);
   const changeSearch = (e) => {
     const value = e.target.value;
@@ -59,7 +61,7 @@ function Navbaradmin() {
         {user ? (
           <div className="d-flex justify-content-center navItem">
             <Link to="/cart">
-              <span>Welcome Back Mohamed Mokhtar</span>
+              <span>Welcome Back {user.userName}</span>
             </Link>
           </div>
         ) : null}
