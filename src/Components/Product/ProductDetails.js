@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import notify from "../util/notify";
 import { ToastContainer } from "react-toastify";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getOneProduct,
@@ -54,7 +54,13 @@ function ProductDetails() {
           >
             <h3 className="fw-bold m-1">{item.name}</h3>
             <span className="d-block  m-1">
-              Category: {item?.category?.name}{" "}
+              Category:
+              <Link
+                to={"/category/" + item?.category?.id}
+                className="text-black"
+              >
+                {item?.category?.name}{" "}
+              </Link>
             </span>
 
             <span className="d-block  m-1">Brand: {item?.brand?.name}</span>

@@ -53,9 +53,17 @@ function Navbaradmin() {
         <div className="d-flex justify-content-center navItem">
           <Link to="/cart">
             <i className="fa-solid fa-cart-shopping mx-1"></i>
-            <span>0</span>
+            <span>5</span>
           </Link>
         </div>
+        {user ? (
+          <div className="d-flex justify-content-center navItem">
+            <Link to="/cart">
+              <span>Welcome Back Mohamed Mokhtar</span>
+            </Link>
+          </div>
+        ) : null}
+
         <div className="d-flex justify-content-center navItem">
           <Link
             to="/login"

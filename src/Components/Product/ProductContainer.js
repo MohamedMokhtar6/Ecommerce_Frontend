@@ -19,12 +19,12 @@ function ProductContainer() {
   }
   return (
     <div className="d-flex flex-wrap justify-content-center">
-      {products ? (
+      {products.length > 0 ? (
         products.map((item, index) => {
           return <ProductCard key={index} product={item} />;
         })
       ) : (
-        <>No Product Found</>
+        <h1>No Product Found!!</h1>
       )}
     </div>
   );
