@@ -11,9 +11,7 @@ function Navbaradmin() {
   var user = JSON.parse(localStorage.getItem("user"));
   const [search, setSearch] = useState("");
   const dispatch = useDispatch();
-  if (user) {
-    console.log(user);
-  }
+
   const allProducts = useSelector((state) => state.allproducts.allProducts);
   const changeSearch = (e) => {
     const value = e.target.value;
@@ -71,6 +69,8 @@ function Navbaradmin() {
             to="/login"
             onClick={() => {
               localStorage.removeItem("user");
+              localStorage.removeItem("cartId");
+              localStorage.removeItem("token");
               navigate("/login");
             }}
           >

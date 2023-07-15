@@ -6,13 +6,17 @@ import notify from "../util/notify";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../redux/Actions/AuthAction";
+import { createCart, getCart } from "../../redux/Actions/CartAction";
 
 function LoginForm() {
+  let userId = 0;
+  let s = "";
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+
   const res = useSelector((state) => state.authReducer.loginUser);
   const handleChangePassword = (event) => {
     event.persist();
@@ -30,7 +34,7 @@ function LoginForm() {
     }
 
     setLoading(true);
-    await dispatch(
+    const response = await dispatch(
       loginUser({
         email,
         password,
@@ -39,6 +43,20 @@ function LoginForm() {
 
     setLoading(false);
   };
+  useEffect(() => {
+    if (res.data) {
+      userId = res.data.userId;
+
+      console.log(userId);
+      dispatch(getCart(userId));
+
+      console.log(cartRes);
+    }
+  }, [res]);
+  const cartRes = useSelector((state) => state.cartReducer.cart);
+  useEffect(() => {
+    if (cartRes.id) localStorage.setItem("cartId", cartRes.id);
+  }, [cartRes]);
 
   useEffect(() => {
     if (loading === false) {
@@ -47,6 +65,12 @@ function LoginForm() {
           localStorage.setItem("token", res.data.token);
           localStorage.setItem("user", JSON.stringify(res.data));
           notify(res.data.masseage, "success");
+          if (res.data.userId) {
+          }
+          if (cartRes.length === 0) {
+            dispatch(createCart({ userId: res.data.userId }));
+          }
+
           setTimeout(() => {
             window.location.href = "/";
           }, 1500);
@@ -69,7 +93,7 @@ function LoginForm() {
         setLoading(true);
       }
     }
-  }, [loading]);
+  }, [loading, res.data]);
   return (
     <div className="loginPage">
       <Container className="h-100 d-flex  justify-content-center align-items-center">

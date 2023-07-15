@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import notify from "../util/notify";
 import { createNewUser, loginUser } from "../../redux/Actions/AuthAction";
+import { createCart } from "../../redux/Actions/CartAction";
 
 function SignUpPage() {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ function SignUpPage() {
   const [phone, setPhone] = useState("");
   const res = useSelector((state) => state.authReducer.createUser);
   const signRes = useSelector((state) => state.authReducer.loginUser);
+  const cartRes = useSelector((state) => state.cartReducer.cart);
 
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -81,11 +83,17 @@ function SignUpPage() {
             password,
           })
         );
-        if (signRes.data) {
+        if (signRes) {
           console.log(signRes);
           if (signRes.data.token) {
             localStorage.setItem("token", signRes.data.token);
             localStorage.setItem("user", JSON.stringify(signRes.data));
+            dispatch(createCart({ userId: signRes.data.userId }));
+            if (cartRes) {
+              console.log(signRes.data.userId);
+              localStorage.setItem("cartId", cartRes.data.id);
+              console.log(cartRes);
+            }
             setTimeout(() => {
               window.location.href = "/";
             }, 1500);
