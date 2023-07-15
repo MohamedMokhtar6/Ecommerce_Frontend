@@ -4,13 +4,16 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import notify from "../util/notify";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../../redux/Actions/AuthAction";
 
 function LoginForm() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [res, setRes] = useState(null);
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
-  const login = { email: email, password: password };
+  const navigate = useNavigate();
+  const res = useSelector((state) => state.authReducer.loginUser);
   const handleChangePassword = (event) => {
     event.persist();
     setPassword(event.target.value);
@@ -20,50 +23,53 @@ function LoginForm() {
     setEmail(event.target.value);
   };
 
-  const Login = async () => {
-    if (email === "") {
-      notify("Enter  email", "error");
+  const onSubmit = async () => {
+    if (email === "" || password === "") {
+      notify("enter Email or Password", "error");
       return;
     }
-    if (password === "") {
-      notify("Enter  passsword", "error");
-      return;
-    }
-    await axios
-      .post("https://localhost:7152/api/Auth/SignIn", login)
-      .then((response) => {
-        setRes(response.data);
 
-        setLoading(false);
+    setLoading(true);
+    await dispatch(
+      loginUser({
+        email,
+        password,
       })
-      .catch(function (error) {
-        if (error.response) {
-          console.log(error.response.data);
-          notify(error.response.data, "warn");
-        }
-      });
+    );
+
+    setLoading(false);
   };
+
   useEffect(() => {
     if (loading === false) {
       if (res) {
-        console.log(res);
-        if (res.token) {
-          localStorage.setItem("token", res.token);
-          localStorage.setItem("user", JSON.stringify(res));
-          notify(res.masseage, "success");
+        if (res.data.token) {
+          localStorage.setItem("token", res.data.token);
+          localStorage.setItem("user", JSON.stringify(res.data));
+          notify(res.data.masseage, "success");
           setTimeout(() => {
-            navigate("/");
+            window.location.href = "/";
           }, 1500);
         } else {
           localStorage.removeItem("token");
           localStorage.removeItem("user");
+          notify(res.data, "warn");
         }
 
+        // if (
+        //   res.data.title == "Unauthorized" ||
+        //   res.status == 401 ||
+        //   res.status == 404
+        // ) {
+        //   localStorage.removeItem("token");
+        //   localStorage.removeItem("user");
+        //   localStorage.removeItem("email");
+        //   notify("There was problem in Email or Password", "error");
+        // }
         setLoading(true);
       }
     }
   }, [loading]);
-  const navigate = useNavigate();
   return (
     <div className="loginPage">
       <Container className="h-100 d-flex  justify-content-center align-items-center">
@@ -114,7 +120,7 @@ function LoginForm() {
               }}
             ></i>
           </div>
-          <button className="p-1 mt-4 loginBtn" onClick={Login}>
+          <button className="p-1 mt-4 loginBtn" onClick={onSubmit}>
             LOGIN
           </button>
         </div>
