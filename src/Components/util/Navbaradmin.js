@@ -74,11 +74,11 @@ function Navbaradmin() {
         <div className="d-flex justify-content-center navItem">
           <Link
             to="/login"
-            onClick={() => {
-              localStorage.removeItem("user");
-              localStorage.removeItem("cartId");
-              localStorage.removeItem("token");
-              navigate("/login");
+            onClick={async () => {
+              await localStorage.removeItem("user");
+              await localStorage.removeItem("cartId");
+              await localStorage.removeItem("token");
+              await navigate("/login");
             }}
           >
             {user ? <>LogOut</> : <>SignIn</>}

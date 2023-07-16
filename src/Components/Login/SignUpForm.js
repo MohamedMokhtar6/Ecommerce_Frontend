@@ -77,28 +77,9 @@ function SignUpPage() {
 
       if (res.status !== 400) {
         notify(res.data.masseage, "success");
-        dispatch(
-          loginUser({
-            email,
-            password,
-          })
-        );
-        if (signRes) {
-          console.log(signRes);
-          if (signRes.data.token) {
-            localStorage.setItem("token", signRes.data.token);
-            localStorage.setItem("user", JSON.stringify(signRes.data));
-            dispatch(createCart({ userId: signRes.data.userId }));
-            if (cartRes) {
-              console.log(signRes.data.userId);
-              localStorage.setItem("cartId", cartRes.data.id);
-              console.log(cartRes);
-            }
-            setTimeout(() => {
-              window.location.href = "/";
-            }, 1500);
-          }
-        }
+        setInterval(() => {
+          navigate("/login");
+        }, 1500);
       } else {
         notify(res.data, "warn");
       }

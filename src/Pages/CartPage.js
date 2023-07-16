@@ -15,7 +15,12 @@ function CartPage() {
   const cart = useSelector((state) => state.cartItemsReducer.cartItem);
   const oneProduct = useSelector((state) => state.allproducts.oneProduct);
   const user = JSON.parse(localStorage.getItem("user"));
-  const userId = user.userId;
+  let userId = null;
+  if (user) {
+    userId = user.userId;
+  }
+  // const [total, setTotal] = useState(0);
+  let total = 0;
 
   useEffect(() => {
     dispatch(getCartItem(cartId));
@@ -26,8 +31,19 @@ function CartPage() {
       setItems(cart);
     }
   }, [cart]);
-  // console.log(cart);
-
+  if (cart) {
+    if (cart.length > 0) {
+      for (let i = 0; i < cart.length; i++) {
+        const tot = cart[i].quantity * cart[i].unitPrice;
+        total = total + tot;
+        //   // console.log(cart[i].quantity);
+        //   // console.log(cart[i].unitPrice);
+        // }
+      }
+    }
+    // console.log(total);
+    // console.log(cart);
+  }
   return (
     <>
       <Navbaradmin />
@@ -39,7 +55,7 @@ function CartPage() {
             {items.length === 0 && <h1>No Product was Found</h1>}
           </Col>
           <Col xs="4">
-            <CartCheckout />
+            <CartCheckout total={total} />
           </Col>
         </Row>
       </Container>

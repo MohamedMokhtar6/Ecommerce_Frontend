@@ -14,4 +14,5 @@ export const CREATE_Cart_Item = "CREATE_Cart_Item";
 export const Delete_Cart_Item = "Delete_Cart_Item";
 export const Update_Cart_Item = "Update_Cart_Item";
 export const Get_Cart_Item = "Get_Cart_Item";
+export const Create_Order = "Create_Order";
 export const LOGIN_USER = "LOGIN_USER";

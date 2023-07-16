@@ -1,18 +1,18 @@
 import React from "react";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-const CartCheckout = () => {
+const CartCheckout = ({ total }) => {
   return (
     <Row className="my-1 d-flex justify-content-center  pt-3">
-      <Col xs="12" className="d-flex  flex-column  ">
-        <div className=" d-inline w-100 my-3  ">34000 جنية</div>
+      <Col xs="12" className="d-flex  flex-column align-items-center  ">
+        <div className="  my-3  ">{total} EGP</div>
         <Link
-          to="/order/paymethoud"
+          to="/order/checkout"
           style={{ textDecoration: "none" }}
           className=" d-inline "
         >
-          <button className=" w-100 px-2"> اتمام الشراء</button>
+          <Button className=" w-100 px-2"> Buy Now</Button>
         </Link>
       </Col>
     </Row>

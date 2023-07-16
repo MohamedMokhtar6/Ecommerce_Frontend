@@ -2,30 +2,39 @@ import React, { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getOneProduct } from "../../redux/Actions/ProductAction";
+import {
+  deleteCartItem,
+  updateCartItem,
+} from "../../redux/Actions/CartItemsAction";
 
 function CartItem({ item }) {
   const dispatch = useDispatch();
-
-  const [quantity, setQuantity] = useState(0);
+  const id = item.id;
+  const [quantity, setQuantity] = useState(item.quantity);
   const [change, setChange] = useState([]);
 
-  const changeQuantity = (e) => {
-    setQuantity(e.target.value);
+  const changeQuantity = async (e) => {
+    await setQuantity(e.target.value);
+    await dispatch(updateCartItem(id, e.target.value));
+    await console.log(e.target.value);
+    window.location.reload();
   };
-  const handelDelete = (e) => {
-    console.log(e.target.parentElement.id);
+  const handelDelete = async (e) => {
+    const id = e.target.parentElement.id;
+    await dispatch(deleteCartItem(id));
+    window.location.reload();
   };
 
   return (
-    <Col className="my-2 d-flex px-2 justify-content-between">
+    <Col className="my-2 d-flex px-2 ">
       <img
         width="160px"
         height="197px"
         src={"data:image/png;base64," + item.product.poster}
         alt=""
       />
-      <div className="">
-        <Row className="justify-content-between">
+      <div className="w-100 ms-5">
+        <Row className="">
           <Col sm="12" className=" d-flex flex-row justify-content-end">
             <div
               id={item.id}
@@ -37,9 +46,7 @@ function CartItem({ item }) {
           </Col>
         </Row>
         <Row className="justify-content-center mt-2">
-          <Col sm="12" className=" d-flex flex-row justify-content-start">
-            <div className="d-inline pt-2 ">{item.product.name}</div>
-          </Col>
+          <div className="d-inline pt-2 ">{item.product.name}</div>
         </Row>
 
         <Row>

@@ -16,7 +16,7 @@ function LoginForm() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-
+  localStorage.removeItem("cartId");
   const res = useSelector((state) => state.authReducer.loginUser);
   const handleChangePassword = (event) => {
     event.persist();
@@ -77,6 +77,7 @@ function LoginForm() {
         } else {
           localStorage.removeItem("token");
           localStorage.removeItem("user");
+          localStorage.removeItem("cartId");
           notify(res.data, "warn");
         }
 

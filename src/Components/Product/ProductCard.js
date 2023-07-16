@@ -21,6 +21,8 @@ function ProductCard({ product }) {
       formData.append("ProductId", proId);
       formData.append("Quantity", 1);
       await dispatch(createCartItem(formData));
+
+      notify("Item Added", "success");
     } else {
       notify("Sign In First", "warn");
     }
