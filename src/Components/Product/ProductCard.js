@@ -15,12 +15,15 @@ function ProductCard({ product }) {
 
   const addToCart = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append("CartId", cartId);
-    formData.append("ProductId", proId);
-    formData.append("Quantity", 1);
-    await dispatch(createCartItem(formData));
-    notify("Item Added", "success");
+    if (cartId) {
+      const formData = new FormData();
+      formData.append("CartId", cartId);
+      formData.append("ProductId", proId);
+      formData.append("Quantity", 1);
+      await dispatch(createCartItem(formData));
+    } else {
+      notify("Sign In First", "warn");
+    }
   };
 
   return (

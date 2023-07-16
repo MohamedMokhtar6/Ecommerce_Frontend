@@ -26,7 +26,7 @@ function Navbaradmin() {
     }
   };
   useEffect(() => {
-    dispatch(getCart(user.userId));
+    if (user) dispatch(getCart(user.userId));
     // console.log(cart.items.length);
   }, [cart]);
 
@@ -60,7 +60,7 @@ function Navbaradmin() {
         <div className="d-flex justify-content-center navItem">
           <Link to="/cart">
             <i className="fa-solid fa-cart-shopping mx-1"></i>
-            <span>{cart.items?.length}</span>
+            <span>{cart.items?.length ? cart.items?.length : 0}</span>
           </Link>
         </div>
         {user ? (
