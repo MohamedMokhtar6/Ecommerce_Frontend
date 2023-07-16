@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { createCartItem } from "../../redux/Actions/CartItemsAction";
+import notify from "../util/notify";
+import { ToastContainer } from "react-toastify";
 
 function ProductCard({ product }) {
   var rate = Array(product?.rate).fill(0);
   const dispatch = useDispatch();
-  const cartItem = useSelector((state) => state.cartItemsReducer.cartItem);
 
   const cartId = localStorage.getItem("cartId");
   const proId = product.id;
@@ -19,6 +20,7 @@ function ProductCard({ product }) {
     formData.append("ProductId", proId);
     formData.append("Quantity", 1);
     await dispatch(createCartItem(formData));
+    notify("Item Added", "success");
   };
 
   return (
@@ -48,6 +50,7 @@ function ProductCard({ product }) {
           </Card.Body>
         </div>
       </Link>
+      <ToastContainer />
     </Card>
   );
 }

@@ -8,8 +8,6 @@ function ProductContainer() {
   const allProducts = useSelector((state) => state.allproducts.allProducts);
   useEffect(() => {
     dispatch(getProducts());
-    if (allProducts) {
-    }
   }, []);
   let products = [];
   if (allProducts) {

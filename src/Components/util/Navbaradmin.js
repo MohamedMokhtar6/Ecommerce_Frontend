@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import CatNavBar from "./CatNavBar";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,6 +6,7 @@ import {
   getAllProductSearch,
   getProducts,
 } from "../../redux/Actions/ProductAction";
+import { getCart } from "../../redux/Actions/CartAction";
 
 function Navbaradmin() {
   var user = JSON.parse(localStorage.getItem("user"));
@@ -13,6 +14,7 @@ function Navbaradmin() {
   const dispatch = useDispatch();
 
   const allProducts = useSelector((state) => state.allproducts.allProducts);
+  const cart = useSelector((state) => state.cartReducer.cart);
   const changeSearch = (e) => {
     const value = e.target.value;
     setSearch(value);
@@ -23,6 +25,11 @@ function Navbaradmin() {
       dispatch(getProducts());
     }
   };
+  useEffect(() => {
+    dispatch(getCart(user.userId));
+    // console.log(cart.items.length);
+  }, [cart]);
+
   const navigate = useNavigate();
   return (
     <>
@@ -53,7 +60,7 @@ function Navbaradmin() {
         <div className="d-flex justify-content-center navItem">
           <Link to="/cart">
             <i className="fa-solid fa-cart-shopping mx-1"></i>
-            <span>5</span>
+            <span>{cart.items?.length}</span>
           </Link>
         </div>
         {user ? (
