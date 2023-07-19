@@ -22,6 +22,24 @@ export const getProducts = () => async (dispatch) => {
     });
   }
 };
+export const getProductsPage = (pageresult, pageNumber) => async (dispatch) => {
+  try {
+    const response = await useGetData(
+      `/api/Products?pageresult=${pageresult}&pageNumber=${pageNumber}`
+    );
+
+    dispatch({
+      type: GET_ALL_ProductS,
+      payload: response,
+      loading: true,
+    });
+  } catch (e) {
+    dispatch({
+      type: GET_ERROR,
+      payload: "Error from catch " + e,
+    });
+  }
+};
 
 export const getOneProduct = (id) => async (dispatch) => {
   try {

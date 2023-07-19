@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "../../redux/Actions/ProductAction";
+import {
+  getProducts,
+  getProductsPage,
+} from "../../redux/Actions/ProductAction";
+import Pagination from "../util/Pagination";
 
 function ProductContainer() {
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.allproducts.allProducts);
   useEffect(() => {
-    dispatch(getProducts());
+    dispatch(getProductsPage(10, 1));
   }, []);
   let products = [];
   if (allProducts) {
@@ -24,6 +28,7 @@ function ProductContainer() {
       ) : (
         <h1>No Product Found!!</h1>
       )}
+      <Pagination />
     </div>
   );
 }
