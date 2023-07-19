@@ -9,10 +9,12 @@ import {
   getProductLike,
 } from "../../redux/Actions/ProductAction";
 import ProductsRow from "./ProductsRow";
+import { createCartItem } from "../../redux/Actions/CartItemsAction";
 
 function ProductDetails() {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const cartId = localStorage.getItem("cartId");
 
   useEffect(() => {
     dispatch(getOneProduct(id));
@@ -36,6 +38,22 @@ function ProductDetails() {
       dispatch(getProductLike(item.category.id));
     }
   }, [item]);
+  const addToCart = async (e) => {
+    e.preventDefault();
+    if (cartId) {
+      e.target.disabled = "true";
+      e.target.innerHTML = "Done☑";
+      const formData = new FormData();
+      formData.append("CartId", cartId);
+      formData.append("ProductId", id);
+      formData.append("Quantity", 1);
+      await dispatch(createCartItem(formData));
+
+      notify("Item Added", "success");
+    } else {
+      notify("Sign In First", "warn");
+    }
+  };
 
   return (
     <>
@@ -75,14 +93,7 @@ function ProductDetails() {
             <p className=" m-1">{item.description}</p>
             <p className=" m-1">In Stock : {item.quntity}</p>
             <p className=" m-1">Price : {item.price} EGP</p>
-            <Button
-              className="fit  border-0 my-2"
-              onClick={(e) => {
-                notify("Request Sent Successfully", "Success");
-                e.target.disabled = "true";
-                e.target.innerHTML = "Done☑";
-              }}
-            >
+            <Button className="fit  border-0 my-2" onClick={addToCart}>
               Add to Cart
             </Button>
           </Col>

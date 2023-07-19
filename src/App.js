@@ -8,6 +8,7 @@ import CartPage from "./Pages/CartPage";
 import CategoriesPage from "./Pages/CategoriesPage";
 import CheckoutPage from "./Pages/CheckoutPage";
 import FooterBar from "./Components/util/FooterBar";
+import AllProductsPage from "./Pages/Product/AllProductsPage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/cart" element={<CartPage />} />
+          <Route path="/allProducts" element={<AllProductsPage />} />
           <Route path="/product/:id" element={<ProductDetailsPage />} />
           <Route path="/category/:id" element={<CategoriesPage />} />
           <Route path="/order/checkout" element={<CheckoutPage />} />
