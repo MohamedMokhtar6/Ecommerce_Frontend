@@ -29,13 +29,16 @@ function HomePage() {
       <Navbaradmin />
       <Container>
         <Slider images={Images} />
-        <ProductsRow
-          btntitle={"More"}
-          title={"Best Selling"}
-          pathText={"/allProducts"}
-          products={products.slice(0, 5)}
-        />
-        {/* <ProductContainer /> */}
+        {products.length > 0 ? (
+          <ProductsRow
+            btntitle={"More"}
+            title={"Best Selling"}
+            pathText={"/allProducts"}
+            products={products.slice(0, 5)}
+          />
+        ) : (
+          <h1 className="text-center">No Product Was Found</h1>
+        )}
       </Container>
     </>
   );

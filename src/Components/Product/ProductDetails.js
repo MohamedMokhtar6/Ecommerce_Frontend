@@ -103,7 +103,7 @@ function ProductDetails() {
         <ProductsRow
           title={"You may like"}
           btntitle="More"
-          pathText="/"
+          pathText="/allProducts"
           products={productLike?.slice(0, 5)}
         />
       ) : null}

@@ -1,4 +1,5 @@
 import {
+  GET_ALL_PRODUCT_PAGE,
   GET_ALL_ProductS,
   GET_ERROR,
   GET_Product_DETAILS,
@@ -29,7 +30,7 @@ export const getProductsPage = (pageresult, pageNumber) => async (dispatch) => {
     );
 
     dispatch({
-      type: GET_ALL_ProductS,
+      type: GET_ALL_PRODUCT_PAGE,
       payload: response,
       loading: true,
     });

@@ -8,28 +8,52 @@ import {
 import Pagination from "../util/Pagination";
 
 function ProductContainer() {
+  const [pageCount, setPageCount] = useState(0);
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.allproducts.allProducts);
+  const AllProductsPage = useSelector(
+    (state) => state.allproducts.allProductsPage
+  );
   useEffect(() => {
+    dispatch(getProducts());
+
     dispatch(getProductsPage(10, 1));
   }, []);
   let products = [];
+  let productsPage = [];
   if (allProducts) {
     products = allProducts;
   } else {
     products = [];
   }
+  if (AllProductsPage) {
+    productsPage = AllProductsPage;
+  } else {
+    productsPage = [];
+  }
+  useEffect(() => {
+    let num = 0;
+    if (products.length > 0) {
+      num = Math.ceil(products.length / 10);
+      setPageCount(num);
+    }
+  }, [products.length]);
+  const onPress = async (page) => {
+    await dispatch(dispatch(getProductsPage(10, page)));
+  };
   return (
-    <div className="d-flex flex-wrap justify-content-center">
-      {products.length > 0 ? (
-        products.map((item, index) => {
-          return <ProductCard key={index} product={item} />;
-        })
-      ) : (
-        <h1>No Product Found!!</h1>
-      )}
-      <Pagination />
-    </div>
+    <>
+      <div className="d-flex flex-wrap justify-content-center">
+        {productsPage.length > 0 ? (
+          productsPage.map((item, index) => {
+            return <ProductCard key={index} product={item} />;
+          })
+        ) : (
+          <h1>No Product Found!!</h1>
+        )}
+      </div>
+      <Pagination pageCount={pageCount} onPress={onPress} />
+    </>
   );
 }
 
