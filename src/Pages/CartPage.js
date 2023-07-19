@@ -49,12 +49,12 @@ function CartPage() {
       <Navbaradmin />
       <Container>
         <Row>
-          <Col xs="8">
+          <Col xs="10">
             {items.length > 0 &&
               items.map((item, index) => <CartItem item={item} key={index} />)}
             {items.length === 0 && <h1>No Product was Found</h1>}
           </Col>
-          <Col xs="4">
+          <Col xs="2">
             <CartCheckout total={total} />
           </Col>
         </Row>

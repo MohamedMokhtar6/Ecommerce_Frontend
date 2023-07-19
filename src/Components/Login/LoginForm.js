@@ -16,7 +16,6 @@ function LoginForm() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  localStorage.removeItem("cartId");
   const res = useSelector((state) => state.authReducer.loginUser);
   const handleChangePassword = (event) => {
     event.persist();
@@ -70,6 +69,7 @@ function LoginForm() {
           if (cartRes.length === 0) {
             dispatch(createCart({ userId: res.data.userId }));
           }
+          if (cartRes.id) localStorage.setItem("cartId", cartRes.id);
 
           setTimeout(() => {
             window.location.href = "/";
@@ -77,7 +77,7 @@ function LoginForm() {
         } else {
           localStorage.removeItem("token");
           localStorage.removeItem("user");
-          localStorage.removeItem("cartId");
+          // localStorage.removeItem("cartId");
           notify(res.data, "warn");
         }
 
@@ -95,6 +95,9 @@ function LoginForm() {
       }
     }
   }, [loading, res.data]);
+  useEffect(() => {
+    localStorage.removeItem("cartId");
+  }, []);
   return (
     <div className="loginPage">
       <Container className="h-100 d-flex  justify-content-center align-items-center">

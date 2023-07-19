@@ -286,4 +286,10 @@ input::-webkit-inner-spin-button {
       display: flex ;
       margin: 1.3rem 0;
     }
+    .search{
+      width: 20rem;
+    }
+    .navBar2{
+      flex-direction: column;
+    }
 }

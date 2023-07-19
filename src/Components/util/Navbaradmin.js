@@ -29,23 +29,32 @@ function Navbaradmin() {
     if (user) dispatch(getCart(user.userId));
     // console.log(cart.items.length);
   }, [cart]);
-
+  const handleClick = async () => {
+    await localStorage.removeItem("user");
+    await localStorage.removeItem("cartId");
+    await localStorage.removeItem("token");
+    window.location.href = "/login";
+  };
   const navigate = useNavigate();
   return (
     <>
       <div className="navBar align-items-center py-2">
-        <i
-          className="fa-solid fa-bars fs-2 click hideNav w-75  text-end"
-          onClick={(e) => {
-            let d = document.querySelectorAll(".navItem");
-            let nav = document.querySelector(".navBar");
-            for (const box of d) {
-              box.classList.toggle("hide");
-            }
-          }}
-        ></i>
-        <div className=" justify-content-center navItem ms-2">
-          <Link to={"/"}>Online Shop</Link>
+        <div className="d-flex w-100 justify-content-around align-items-center ">
+          <i
+            className="fa-solid fa-bars fs-2 click hideNav fit  text-end"
+            onClick={(e) => {
+              let d = document.querySelectorAll(".navItem");
+              let nav = document.querySelector(".navBar");
+              for (const box of d) {
+                box.classList.toggle("hide");
+              }
+            }}
+          ></i>
+          <div className=" justify-content-center  ms-2 fit">
+            <Link to={"/"} className="text-white">
+              Online Shop
+            </Link>
+          </div>
         </div>
         <div>
           <input
@@ -72,15 +81,7 @@ function Navbaradmin() {
         ) : null}
 
         <div className="d-flex justify-content-center navItem">
-          <Link
-            to="/login"
-            onClick={async () => {
-              await localStorage.removeItem("user");
-              await localStorage.removeItem("cartId");
-              await localStorage.removeItem("token");
-              await navigate("/login");
-            }}
-          >
+          <Link to="/login" onClick={handleClick}>
             {user ? <>LogOut</> : <>SignIn</>}
           </Link>
         </div>

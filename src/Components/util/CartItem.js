@@ -26,14 +26,14 @@ function CartItem({ item }) {
   };
 
   return (
-    <Col className="my-2 d-flex px-2 ">
-      <img
-        width="160px"
-        height="197px"
-        src={"data:image/png;base64," + item.product.poster}
-        alt=""
-      />
+    <Row className="my-2 d-flex px-2 ">
       <div className="w-100 ms-5">
+        <img
+          width="160px"
+          height="197px"
+          src={"data:image/png;base64," + item.product.poster}
+          alt=""
+        />
         <Row className="">
           <Col sm="12" className=" d-flex flex-row justify-content-end">
             <div
@@ -77,7 +77,7 @@ function CartItem({ item }) {
           <div className="d-inline pt-2">{item.unitPrice} EGP</div>
         </Row>
       </div>
-    </Col>
+    </Row>
   );
 }
 

@@ -59,7 +59,7 @@ function FooterBar() {
 
         <section className="">
           <form action="">
-            <div className="row d-flex justify-content-center">
+            <div className="row mx=0 d-flex justify-content-center">
               <div className="col-auto">
                 <p className="pt-2">
                   <strong>Sign up for our newsletter</strong>
