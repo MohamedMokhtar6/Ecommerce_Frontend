@@ -75,7 +75,7 @@ function Navbaradmin() {
         {user ? (
           <div className="d-flex justify-content-center navItem">
             <Link to="/cart">
-              <span>Welcome Back {user.userName}</span>
+              <span className="w-25">Welcome Back {user.userName}</span>
             </Link>
           </div>
         ) : null}

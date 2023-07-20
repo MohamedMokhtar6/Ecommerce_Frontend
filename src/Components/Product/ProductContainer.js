@@ -6,6 +6,7 @@ import {
   getProductsPage,
 } from "../../redux/Actions/ProductAction";
 import Pagination from "../util/Pagination";
+import Skeleton from "../util/Skeleton";
 
 function ProductContainer() {
   const [pageCount, setPageCount] = useState(0);
@@ -49,7 +50,7 @@ function ProductContainer() {
             return <ProductCard key={index} product={item} />;
           })
         ) : (
-          <h1>No Product Found!!</h1>
+          <Skeleton />
         )}
       </div>
       <Pagination pageCount={pageCount} onPress={onPress} />

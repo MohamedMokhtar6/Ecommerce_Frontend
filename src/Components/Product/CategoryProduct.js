@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getProductLike } from "../../redux/Actions/ProductAction";
 import ProductCard from "./ProductCard";
+import Skeleton from "../util/Skeleton";
 
 function CategoryProduct() {
   const { id } = useParams();
@@ -21,7 +22,7 @@ function CategoryProduct() {
           return <ProductCard key={index} product={item} />;
         })
       ) : (
-        <>No Product Found</>
+        <Skeleton />
       )}
     </div>
   );

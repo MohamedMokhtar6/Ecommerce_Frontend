@@ -10,6 +10,7 @@ import ProductContainer from "../Components/Product/ProductContainer";
 import ProductsRow from "../Components/Product/ProductsRow";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../redux/Actions/ProductAction";
+import Skeleton from "../Components/util/Skeleton";
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -32,12 +33,12 @@ function HomePage() {
         {products.length > 0 ? (
           <ProductsRow
             btntitle={"More"}
-            title={"Best Selling"}
+            title={"Best Seller"}
             pathText={"/allProducts"}
             products={products.slice(0, 5)}
           />
         ) : (
-          <h1 className="text-center">No Product Was Found</h1>
+          <Skeleton />
         )}
       </Container>
     </>

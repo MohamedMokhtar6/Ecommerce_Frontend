@@ -10,6 +10,7 @@ import {
 } from "../../redux/Actions/ProductAction";
 import ProductsRow from "./ProductsRow";
 import { createCartItem } from "../../redux/Actions/CartItemsAction";
+import Skeleton from "../util/Skeleton";
 
 function ProductDetails() {
   const { id } = useParams();
@@ -63,7 +64,7 @@ function ProductDetails() {
             <img
               src={item.poster}
               alt={item.name}
-              style={{ width: "20rem", height: "20rem" }}
+              style={{ width: "20rem", height: "20rem", maxWidth: "100%" }}
             />
           </Col>
           <Col
@@ -106,7 +107,9 @@ function ProductDetails() {
           pathText="/allProducts"
           products={productLike?.slice(0, 5)}
         />
-      ) : null}
+      ) : (
+        <Skeleton />
+      )}
 
       <ToastContainer />
     </>

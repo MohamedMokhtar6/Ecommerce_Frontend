@@ -258,7 +258,19 @@ input::-webkit-inner-spin-button {
   position: absolute;
   width: 0px;
 }
-
+.skeleton{
+    width: 20rem;
+    height: 12rem;
+    background-color: #dddddd;
+    margin: 20px;
+    animation: skeleton 2s infinite;
+    -webkit-animation: skeleton 2s infinite;
+}
+@keyframes skeleton {
+  0%   {background-color: #dddddd;}
+  50%  {background-color: #989898;}
+  100% {background-color: #dddddd;}
+}
 
 @media (max-width: 576px) {
    
@@ -266,6 +278,12 @@ input::-webkit-inner-spin-button {
     width: 50% !important;
 
    }
+  }
+@media (max-width: 1015px) {
+   
+    .search{
+      width: 30rem;
+    }
 }
 @media (max-width: 851px) {
    .hideNav{
