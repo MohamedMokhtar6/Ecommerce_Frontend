@@ -1,5 +1,7 @@
 import axios from "axios";
 
-const baseUrl = axios.create({ baseURL: "https://localhost:7152" });
+const baseUrl = axios.create({
+  baseURL: "http://online-store.somee.com",
+});
 
 export default baseUrl;
