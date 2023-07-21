@@ -28,7 +28,10 @@ function HomePage() {
   return (
     <>
       <Navbaradmin />
-      <Container>
+      <Container
+        style={{ minHeight: "76vh" }}
+        className="d-flex align-items-center flex-column"
+      >
         <Slider images={Images} />
         {products.length > 0 ? (
           <ProductsRow

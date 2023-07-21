@@ -47,7 +47,7 @@ function CartPage() {
   return (
     <>
       <Navbaradmin />
-      <Container>
+      <Container style={{ minHeight: "76vh" }}>
         <Row>
           <Col xs="10">
             {items.length > 0 &&

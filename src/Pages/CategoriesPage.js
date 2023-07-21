@@ -7,7 +7,7 @@ function CategoriesPage() {
   return (
     <>
       <Navbaradmin />
-      <Container>
+      <Container style={{ minHeight: "76vh" }}>
         <CategoryProduct />
       </Container>
     </>

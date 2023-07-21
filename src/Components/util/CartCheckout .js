@@ -3,12 +3,13 @@ import { Row, Col, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const CartCheckout = ({ total }) => {
+  const user = localStorage.getItem("user");
   return (
     <Row className="my-1 d-flex justify-content-center  pt-3">
       <Col xs="12" className="d-flex  flex-column align-items-center  ">
         <div className="  my-3  ">{total} EGP</div>
         <Link
-          to="/order/checkout"
+          to={user ? "/order/checkout" : "/"}
           style={{ textDecoration: "none" }}
           className=" d-inline "
         >

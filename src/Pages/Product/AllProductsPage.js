@@ -7,7 +7,7 @@ function AllProductsPage() {
   return (
     <>
       <Navbaradmin />
-      <Container>
+      <Container style={{ minHeight: "76vh" }}>
         <ProductContainer />
       </Container>
     </>

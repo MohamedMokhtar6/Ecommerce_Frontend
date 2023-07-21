@@ -50,7 +50,7 @@ export default function CheckoutPage() {
   return (
     <>
       <Navbaradmin />
-      <Container>
+      <Container style={{ minHeight: "76vh" }}>
         <Row className="my-4">
           <input
             type="text"
