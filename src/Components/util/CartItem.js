@@ -27,7 +27,7 @@ function CartItem({ item }) {
 
   return (
     <Row className="my-2 d-flex px-2 ">
-      <div className="w-100 ms-5">
+      <div className="w-100 ">
         <img
           width="160px"
           height="197px"
